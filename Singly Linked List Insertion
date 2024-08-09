@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <stdlib.h>
+// Declaration of Linked list
+struct node{
+    int data;
+    struct node *next;
+}*head=NULL,*temp=NULL;
+
+// Insertion At Begining
+void insertbegning(int d) {
+    struct node *newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=d;
+    newnode->next=NULL;
+    if(head==NULL){
+        head=newnode;
+    }
+    else{
+        newnode->next=head;
+        head=newnode;
+    }
+}
+
+//Insertion At Last
+void insertlast(int d) {
+    struct node *newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=d;
+    newnode->next=NULL;
+    if(head==NULL){
+        head=newnode;
+        temp=newnode;
+    }
+    else{
+        temp->next=newnode;
+        temp=newnode;
+    }
+}
+
+//Insertion At Specific Position
+void insertpos(int d,int x){
+    int i=1,pos;
+    struct node *newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=d;
+    pos=x;
+    temp=head;
+    if(pos==1){
+        insertbegning(d);
+    }
+    else{
+        while(i<pos-1){
+        temp=temp->next;
+        i++;
+        }
+        newnode->next=temp->next;
+        temp->next=newnode;
+    }
+}
+//Display the Output
+
+void display()
+{
+    printf("Current values in Linked List \n");
+    struct node *t=head;
+        while(t!=NULL)
+        {
+            printf("%d ", t->data);
+            t=t->na;
+        } 
+}
+//here the input is directly passed ,you can use the switch case statement and get the input from the user 
+void main(){
+    insert(10);
+    insert(20);
+    insert(30);
+    insert(40);
+    insertbegning(7);
+    insertpos(25,3);
+    display();
+}
