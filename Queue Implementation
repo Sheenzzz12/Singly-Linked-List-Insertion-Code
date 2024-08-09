@@ -1,0 +1,120 @@
+1.using array
+#include <stdio.h>
+#define max 100
+int queue[max];
+int rear=-1,front=-1;
+void enqueue(){
+    int d;
+    printf("Enter the element to be inserted=");
+    scanf("%d",&d);
+    if(rear==max-1){
+        printf("Queue is full");
+    }
+    else if(front==-1 && rear==-1){
+        front++;
+        rear++;
+        queue[rear]=d;
+    }
+    else{
+        rear++;
+        queue[rear]=d;
+        
+    }
+}
+
+int dequeue(){
+    int item;
+    if(front==-1 && rear==-1){
+        printf("Queue is empty");
+    }
+    else if(front==rear){
+        rear=-1;
+        front=-1;
+    }
+    else{
+        item=queue[front];
+        front++;
+    }
+    return item;
+}
+void peek(){
+    int i;
+    int temp=front;
+    if(front==-1 && rear==-1){
+        printf("Queue is empty");
+    }
+    else{
+        for(i=temp;i<=rear;i++){
+            printf("%d ",queue[i]);
+        }
+    }
+}
+
+void main(){
+    enqueue();
+    enqueue();
+    enqueue();
+    enqueue();
+    dequeue();
+    dequeue();
+    peek();
+}
+
+
+
+2.using LINKED LISt
+#include <stdio.h>
+#include<stdlib.h>
+struct queue{
+    int data;
+    struct queue *next;
+}*rear=NULL,*front=NULL;
+
+void enqueue(int value){
+    struct queue *newnode;
+    newnode=(struct queue*)malloc(sizeof(struct queue));
+    newnode->data=value;
+    newnode->next=NULL;
+    if(front==NULL && rear==NULL){
+        front=newnode;
+        rear=newnode;
+    }
+    else{
+        rear->next=newnode;
+        rear=newnode;
+    }
+}
+void dequeue(){
+    struct queue *temp;
+    if(front==NULL && rear==NULL){
+        printf("Queue is empty");
+    }
+    else{
+        temp=front;
+        front=temp->next;
+        free(temp);
+    }
+}
+
+void peek(){
+    struct queue*i;
+     if(front==NULL && rear==NULL){
+        printf("Queue is empty");
+    }
+    else{
+       while(i!=NULL){
+             printf("%d ",i->data);
+             i=i->next;
+        }
+   
+    }
+}
+void main(){
+    enqueue(23);
+    enqueue(39);
+    enqueue(56);
+    enqueue(45);
+    dequeue();
+    dequeue();
+    peek();
+}
