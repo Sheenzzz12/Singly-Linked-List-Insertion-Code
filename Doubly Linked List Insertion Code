@@ -1,0 +1,107 @@
+#include <stdio.h>
+#include <stdlib.h>
+// Declaration of Doubly Linked List
+struct node{
+    int data;
+    struct node*next;
+     struct node*prev;
+    
+}*head=NULL,*temp=NULL;
+
+//Insertion at Last
+void insertlast(int d){
+     struct node*newnode=( struct node*)malloc(sizeof( struct node));
+     newnode->data=d;
+     newnode->next=NULL;
+     newnode->prev=NULL;
+     if(head==NULL){
+         head=temp=newnode;
+     }
+     else{
+         newnode->prev=temp;
+         temp->next=newnode;
+         temp=newnode;
+     }
+}
+
+//Insertion at Beginning
+void insertbeg(int d){
+    struct node*newnode=( struct node*)malloc(sizeof( struct node));
+     newnode->data=d;
+     newnode->next=NULL;
+     newnode->prev=NULL;
+     //temp=head;
+      if(head==NULL){
+         head=temp=newnode;
+     }
+     else{
+     head->prev=newnode;
+     newnode->next=head;
+     head=newnode;}
+}
+
+//Insertion at Specific Position
+void insertpos(int d,int p){  
+    
+    int i=1;
+    struct node*newnode=( struct node*)malloc(sizeof( struct node));
+     newnode->data=d;
+     newnode->next=NULL;
+     newnode->prev=NULL;
+     if(p==1){
+        insertbeg(d);
+    }
+    else if(p>1 && temp->next==NULL)
+    {
+        insertlast(d);
+    }
+    else{
+     temp=head;
+     while(i<p-1){
+         temp=temp->next;
+         i++;
+     }
+     newnode->prev=temp;
+     newnode->next=temp->next;
+     temp->next=newnode;
+     newnode->next->prev=newnode;
+    }
+}
+
+//Display Output
+
+void print(){
+    temp=head;
+    while(temp!=0){
+        printf("%d ",temp->data);
+        temp=temp->next;
+    }
+}
+
+//Display Output at reverse
+void printrev(){
+    struct node*x=head;
+    
+     while(x->next!=0){
+        x=x->next;
+    }
+    while(x!=0){
+        printf("\n %d ",x->data);
+        x=x->prev;
+    }
+    //printf("%d",x->data);
+    
+}
+
+
+void main(){
+     insertlast(12);
+     insertlast(92);
+     insertlast(62);
+     insertbeg(8);
+     insertpos(12,1);
+     print();
+     printrev();
+}
+
+
