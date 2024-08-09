@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include<stdlib.h>
+#include<string.h>
+char str[50];
+struct node{
+    int data;
+    struct node *next;
+}*top=NULL,*temp=NULL;
+
+void push(int d){
+    struct node*newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=d;
+    newnode->next=NULL;
+    if(top==NULL){
+        top=temp=newnode;
+    }
+    else{
+        newnode->next=top;
+        top=newnode;
+    }
+}
+int pop()
+{
+    int item;
+    if(top==NULL){
+        printf("Stack is underflow");
+    }
+    else{
+        struct node *del;
+        temp=top;
+        item=temp->data;
+        top=temp->next;
+        del=temp;
+        free(del);
+    }
+    return item;
+}
+
+void postfix(char arr[],int l)
+{       int i,final; 
+        for(i=0;i<l;i++){
+         if(arr[i]>='0' && arr[i]<='9'){
+             push(arr[i]-48);
+         }
+         else{
+             int operate=arr[i];
+             int result,a,b;
+             char v1,v2;
+             a=pop();
+             b=pop();
+        
+             if (operate == '+'){
+                 result=a+b;
+             }
+             else if (operate == '-'){
+                 result=a-b;
+             }
+             else if (operate == '*'){
+                 result=a*b;
+             }
+             if (operate == '/'){
+                 result=a/b;
+             }
+            
+            push(result); 
+             
+         }
+     }
+    
+     printf("%d",pop());
+}
+void main()
+    int size,x;
+    printf("enter the expression");
+    scanf("%s",&str);
+    size=strlen(str);
+    postfix(str,size);
+   
+}
+    
