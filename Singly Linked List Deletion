@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+//Declaration of Linked List
+struct node{
+    int data;
+    struct node *next;
+}*head=NULL,*temp=NULL;
+
+//Deletion At beginning
+void deletefrombeg()
+{
+    pos=head;
+    head=pos->na;
+    pos=head;
+}
+
+//Deletion At last
+void deleteatend()
+{
+    struct node *temp=head;
+    struct node *x;
+    while(temp->na!=NULL)
+    {
+        x=temp;
+        temp=temp->na;
+                
+    }
+    x->na=NULL;
+}
+
+//Deletion At Specific Position
+void deleteatpos(int p)
+{
+    pos=head;
+    struct node *x,*temp;
+    for(int i=1;i<=p;i++)
+    {
+        //temp->na=pos->na;
+        x=pos;
+        pos=pos->na;
+    }
+    temp=x->na;;
+    x->na=NULL;
+    free(x);
+    pos=head;
+    pos->na=temp;
+}
+
+//Display the output
+void display()
+{
+    printf("Current values in Linked List \n");
+    struct node *t=head;
+        while(t!=NULL)
+        {
+            printf("%d ", t->data);
+            t=t->na;
+        } 
+}
+
+
+
